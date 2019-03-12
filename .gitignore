@@ -15,3 +15,6 @@ go-hero
 # Go patch
 /vendor/
 /Godeps/
+
+# Database
+/hero-db/data

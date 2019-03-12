@@ -20,27 +20,21 @@ git clone https://github.com/nicolaspearson/go.heroes.api.git
 docker-compose up
 ```
 
-**3. Run the database migrations**
+**3. Build and run the app using cargo**
+
+#### Run the app in development mode:
 
 ```bash
-diesel migration run
-```
-
-**4. Build and run the app using cargo**
-
-### Run the app in development mode:
-
-```bash
-cargo run
+go run main.go
 ```
 
 The app will start running at <http://localhost:8000>
 
-### Run the app in release mode:
+#### Run the app in release mode:
 
 ```bash
-cargo build --release && cd target/release/
-sudo ROCKET_ENV=prod ./hero-api
+go build
+./go-hero
 ```
 
 The app will start running at <http://localhost:8000>
@@ -48,6 +42,14 @@ The app will start running at <http://localhost:8000>
 ## Endpoints
 
 The following endpoints are available
+
+```
+POST /api/user/new
+```
+
+```
+POST /api/user/login
+```
 
 ```
 GET /heroes
