@@ -4,7 +4,7 @@ An example REST API built using Go and PostgreSQL.
 
 ## Dependencies
 
-This project makes use of Rocket, Serde and Diesel.
+This project makes use of gorilla/mux, gorm, and godotenv.
 
 ## Getting Started
 
@@ -15,11 +15,13 @@ git clone https://github.com/nicolaspearson/go.heroes.api.git
 ```
 
 **2. Start the database**
+
 ```bash
 docker-compose up
 ```
 
 **3. Run the database migrations**
+
 ```bash
 diesel migration run
 ```
@@ -51,11 +53,11 @@ The following endpoints are available
 GET /heroes
 ```
 
-``` 
+```
 POST /hero
 ```
 
-``` 
+```
 PUT /hero/{heroId}
 ```
 
