@@ -8,28 +8,33 @@ import (
 	u "go-hero/utils"
 )
 
-var CreateAccount = func(w http.ResponseWriter, r *http.Request) {
-
-	account := &models.Account{}
-	err := json.NewDecoder(r.Body).Decode(account) //decode the request body into struct and failed if any error occur
+// CreateUser : Creates a new user
+var CreateUser = func(w http.ResponseWriter, r *http.Request) {
+	user := &models.User{}
+	err := json.NewDecoder(r.Body).Decode(user)
+	// Decode the request body into a struct
 	if err != nil {
+		// Decoding failed, return an error
 		u.Respond(w, u.Message(false, "Invalid request"))
 		return
 	}
 
-	resp := account.Create() //Create account
+	// Create user
+	resp := user.Create()
 	u.Respond(w, resp)
 }
 
+// Authenticate : Authenticates a user
 var Authenticate = func(w http.ResponseWriter, r *http.Request) {
-
-	account := &models.Account{}
-	err := json.NewDecoder(r.Body).Decode(account) //decode the request body into struct and failed if any error occur
+	user := &models.User{}
+	err := json.NewDecoder(r.Body).Decode(user)
+	// Decode the request body into a struct
 	if err != nil {
+		// Decoding failed, return an error
 		u.Respond(w, u.Message(false, "Invalid request"))
 		return
 	}
 
-	resp := models.Login(account.Email, account.Password)
+	resp := models.Login(user.Email, user.Password)
 	u.Respond(w, resp)
 }

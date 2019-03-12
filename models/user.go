@@ -69,7 +69,7 @@ func (user *User) Create() map[string]interface{} {
 	// Create new JWT token
 	tk := &Token{UserID: user.ID}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
-	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
+	tokenString, _ := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
 	user.Token = tokenString
 
 	// Delete password
@@ -102,7 +102,7 @@ func Login(email, password string) map[string]interface{} {
 	// Create a JWT
 	tk := &Token{UserID: user.ID}
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), tk)
-	tokenString, _ := token.SignedString([]byte(os.Getenv("token_password")))
+	tokenString, _ := token.SignedString([]byte(os.Getenv("JWT_SECRET")))
 	// Store the token in the response
 	user.Token = tokenString
 
