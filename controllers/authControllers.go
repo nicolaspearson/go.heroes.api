@@ -8,8 +8,8 @@ import (
 	u "go-hero/utils"
 )
 
-// CreateUser : Creates a new user
-var CreateUser = func(w http.ResponseWriter, r *http.Request) {
+// RegisterUser : Registers a new user
+var RegisterUser = func(w http.ResponseWriter, r *http.Request) {
 	user := &models.User{}
 	err := json.NewDecoder(r.Body).Decode(user)
 	// Decode the request body into a struct
@@ -19,7 +19,7 @@ var CreateUser = func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Create user
+	// Create the user
 	resp := user.Create()
 	u.Respond(w, resp)
 }

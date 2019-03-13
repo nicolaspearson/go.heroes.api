@@ -45,7 +45,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 
 		splitted := strings.Split(tokenHeader, " ")
 		// The token normally comes in the format `Bearer {token-body}`,
-		// we check if the retrieved token matched this requirement.
+		// check if the retrieved token matches this format.
 		if len(splitted) != 2 {
 			response = u.Message(false, "Invalid/Malformed auth token")
 			w.WriteHeader(http.StatusForbidden)

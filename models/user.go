@@ -22,18 +22,18 @@ type User struct {
 	gorm.Model
 	Email    string `json:"email"`
 	Password string `json:"password"`
-	Token    string `json:"token";sql:"-"`
+	Token    string `json:"token" sql:"-"`
 }
 
 // Validate : Validates a user's details
 func (user *User) Validate() (map[string]interface{}, bool) {
 
 	if !strings.Contains(user.Email, "@") {
-		return u.Message(false, "Email address is required"), false
+		return u.Message(false, "An email address is required"), false
 	}
 
 	if len(user.Password) < 6 {
-		return u.Message(false, "Password is required"), false
+		return u.Message(false, "A password is required"), false
 	}
 
 	// Email must be unique
@@ -45,7 +45,7 @@ func (user *User) Validate() (map[string]interface{}, bool) {
 		return u.Message(false, "Connection error. Please retry"), false
 	}
 	if temp.Email != "" {
-		return u.Message(false, "Email address already in use by another user."), false
+		return u.Message(false, "This email address is already in use."), false
 	}
 
 	return u.Message(false, "Requirement passed"), true
