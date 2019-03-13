@@ -16,6 +16,7 @@ func main() {
 	router.HandleFunc("/user/register", controllers.RegisterUser).Methods("POST")
 	router.HandleFunc("/user/login", controllers.Authenticate).Methods("POST")
 	router.HandleFunc("/hero", controllers.CreateHero).Methods("POST")
+	router.HandleFunc("/hero/{id}", controllers.UpdateHero).Methods("PUT")
 	router.HandleFunc("/hero", controllers.GetHero).Methods("GET")
 	router.HandleFunc("/heroes", controllers.GetHeroes).Methods("GET")
 

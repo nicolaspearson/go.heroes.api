@@ -41,18 +41,6 @@ func (hero *Hero) Validate() (map[string]interface{}, bool) {
 		return u.Message(false, "An age is required"), false
 	}
 
-	// Hero name must be unique
-	temp := &Hero{}
-
-	// Check for duplicates
-	err := GetDB().Table("heroes").Where("name = ?", hero.Name).First(temp).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
-		return u.Message(false, "Connection error. Please retry"), false
-	}
-	if temp.Name != "" {
-		return u.Message(false, "This hero has already been created."), false
-	}
-
 	return u.Message(false, "Validation passed"), true
 }
 
@@ -62,13 +50,52 @@ func (hero *Hero) Create() map[string]interface{} {
 		return resp
 	}
 
+	// Check for duplicates
+	temp := &Hero{}
+	err := GetDB().Table("heroes").Where("name = ?", hero.Name).First(temp).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		fmt.Println(err)
+		return u.Message(false, "Insert operation failed")
+	}
+	// Hero name must be unique
+	if temp.Name != "" {
+		return u.Message(false, "This hero has already been created.")
+	}
+
 	GetDB().Create(hero)
 
 	if hero.ID <= 0 {
-		return u.Message(false, "Failed to create hero, connection error.")
+		return u.Message(false, "Unable to create hero!")
 	}
 
 	response := u.Message(true, "Hero has been created")
+	response["hero"] = hero
+	return response
+}
+
+// Update : Updates an existing hero
+func (hero *Hero) Update(id int) map[string]interface{} {
+	if resp, ok := hero.Validate(); !ok {
+		return resp
+	}
+
+	// Ensure record exists
+	temp := &Hero{}
+	err := GetDB().Table("heroes").Where("id = ?", id).First(temp).Error
+	if err != nil {
+		fmt.Println(err)
+		return u.Message(false, "Update operation failed, invalid id!")
+	}
+
+	hero.ID = temp.ID
+	hero.CreatedAt = temp.CreatedAt
+	err = GetDB().Save(hero).Error
+	if err != nil {
+		fmt.Println(err)
+		return u.Message(false, "Update operation failed!")
+	}
+
+	response := u.Message(false, "Hero has been updated")
 	response["hero"] = hero
 	return response
 }

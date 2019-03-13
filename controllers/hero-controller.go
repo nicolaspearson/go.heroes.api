@@ -7,6 +7,8 @@ import (
 
 	"go-hero/models"
 	u "go-hero/utils"
+
+	"github.com/gorilla/mux"
 )
 
 // CreateHero : Creates a new hero
@@ -22,6 +24,30 @@ var CreateHero = func(w http.ResponseWriter, r *http.Request) {
 
 	// Create the hero
 	resp := hero.Create()
+	u.Respond(w, resp)
+}
+
+// UpdateHero : Updates an existing hero
+var UpdateHero = func(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, err := strconv.Atoi(params["id"])
+	if err != nil {
+		// The passed path parameter is not an integer
+		u.Respond(w, u.Message(false, "Invalid request"))
+		return
+	}
+
+	hero := &models.Hero{}
+	// Decode the request body into a struct
+	err = json.NewDecoder(r.Body).Decode(hero)
+	if err != nil {
+		// Decoding failed, return an error
+		u.Respond(w, u.Message(false, "Invalid request"))
+		return
+	}
+
+	// Update the hero
+	resp := hero.Update(id)
 	u.Respond(w, resp)
 }
 
