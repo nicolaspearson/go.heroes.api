@@ -11,6 +11,44 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// GetHero : Fetches a the hero associated with the provided id
+var GetHero = func(w http.ResponseWriter, r *http.Request) {
+	params := r.URL.Query()
+	idParam, ok := params["id"]
+	if !ok {
+		u.Respond(w, u.Message(false, "Invalid request"))
+		return
+	}
+
+	id, err := strconv.Atoi(idParam[0])
+	if err != nil {
+		// The parameter is not an integer
+		u.Respond(w, u.Message(false, "Invalid request"))
+		return
+	}
+
+	data := models.GetHero(uint(id))
+	if data == nil {
+		u.Respond(w, u.Message(false, "Record not found!"))
+		return
+	}
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+}
+
+// GetHeroes : Fetches all the heroes
+var GetHeroes = func(w http.ResponseWriter, r *http.Request) {
+	data := models.GetHeroes()
+	if data == nil {
+		u.Respond(w, u.Message(false, "No records found!"))
+		return
+	}
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+}
+
 // CreateHero : Creates a new hero
 var CreateHero = func(w http.ResponseWriter, r *http.Request) {
 	hero := &models.Hero{}
@@ -47,35 +85,25 @@ var UpdateHero = func(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Update the hero
-	resp := hero.Update(id)
+	resp := hero.Update(uint(id))
 	u.Respond(w, resp)
 }
 
-// GetHero : Fetches a the hero associated with the provided id
-var GetHero = func(w http.ResponseWriter, r *http.Request) {
-	params := r.URL.Query()
-	idParam, ok := params["id"]
-	if !ok {
-		u.Respond(w, u.Message(false, "Invalid request"))
-		return
-	}
-
-	id, err := strconv.Atoi(idParam[0])
+// DeleteHero : Deletes the hero associated with the provided id
+var DeleteHero = func(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	id, err := strconv.Atoi(params["id"])
 	if err != nil {
-		// The parameter is not an integer
+		// The passed path parameter is not an integer
 		u.Respond(w, u.Message(false, "Invalid request"))
 		return
 	}
 
-	data := models.GetHero(uint(id))
-	resp := u.Message(true, "success")
-	resp["data"] = data
-	u.Respond(w, resp)
-}
-
-// GetHeroes : Fetches all the heroes
-var GetHeroes = func(w http.ResponseWriter, r *http.Request) {
-	data := models.GetHeroes()
+	data := models.DeleteHero(uint(id))
+	if data == nil {
+		u.Respond(w, u.Message(false, "Record not found!"))
+		return
+	}
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)

@@ -19,6 +19,7 @@ func main() {
 	router.HandleFunc("/hero/{id}", controllers.UpdateHero).Methods("PUT")
 	router.HandleFunc("/hero", controllers.GetHero).Methods("GET")
 	router.HandleFunc("/heroes", controllers.GetHeroes).Methods("GET")
+	router.HandleFunc("/hero/{id}", controllers.DeleteHero).Methods("DELETE")
 
 	// Attach the JWT auth middleware
 	router.Use(app.JwtAuthentication)

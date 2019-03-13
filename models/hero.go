@@ -46,6 +46,10 @@ func (hero *Hero) Validate() (map[string]interface{}, bool) {
 
 // GetHero : Fetches a hero from the database
 func GetHero(id uint) *Hero {
+	if id < 1 {
+		return nil
+	}
+
 	hero := &Hero{}
 	GetDB().Table("heroes").Where("id = ?", id).First(hero)
 	if hero.Name == "" {
@@ -97,7 +101,11 @@ func (hero *Hero) Create() map[string]interface{} {
 }
 
 // Update : Updates an existing hero
-func (hero *Hero) Update(id int) map[string]interface{} {
+func (hero *Hero) Update(id uint) map[string]interface{} {
+	if id < 1 {
+		return u.Message(false, "Invalid id!")
+	}
+
 	if resp, ok := hero.Validate(); !ok {
 		return resp
 	}
@@ -121,4 +129,26 @@ func (hero *Hero) Update(id int) map[string]interface{} {
 	response := u.Message(false, "Hero has been updated")
 	response["hero"] = hero
 	return response
+}
+
+// DeleteHero : Deletes an existing hero
+func DeleteHero(id uint) *Hero {
+	if id < 1 {
+		return nil
+	}
+
+	hero := &Hero{}
+	err := GetDB().Where("id = ?", id).Find(&hero).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	err = GetDB().Where("id = ?", id).Delete(Hero{}).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+
+	return hero
 }
