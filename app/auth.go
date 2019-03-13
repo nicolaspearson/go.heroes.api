@@ -47,7 +47,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 		// The token normally comes in the format `Bearer {token-body}`,
 		// check if the retrieved token matches this format.
 		if len(splitted) != 2 {
-			response = u.Message(false, "Invalid/Malformed auth token")
+			response = u.Message(false, "Invalid / malformed auth token")
 			w.WriteHeader(http.StatusForbidden)
 			w.Header().Add("Content-Type", "application/json")
 			u.Respond(w, response)
@@ -64,7 +64,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 
 		if err != nil {
 			// Malformed token, return error code 403 Unauthorized
-			response = u.Message(false, "Malformed authentication token")
+			response = u.Message(false, "Malformed auth token")
 			w.WriteHeader(http.StatusForbidden)
 			w.Header().Add("Content-Type", "application/json")
 			u.Respond(w, response)
@@ -73,7 +73,7 @@ var JwtAuthentication = func(next http.Handler) http.Handler {
 
 		if !token.Valid {
 			// Token is invalid
-			response = u.Message(false, "Token is not valid.")
+			response = u.Message(false, "Invalid auth token")
 			w.WriteHeader(http.StatusForbidden)
 			w.Header().Add("Content-Type", "application/json")
 			u.Respond(w, response)

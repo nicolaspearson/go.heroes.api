@@ -48,7 +48,7 @@ func (user *User) Validate() (map[string]interface{}, bool) {
 		return u.Message(false, "This email address is already in use."), false
 	}
 
-	return u.Message(false, "Requirement passed"), true
+	return u.Message(false, "Validation passed"), true
 }
 
 // Create : Registers a new user
@@ -112,9 +112,9 @@ func Login(email, password string) map[string]interface{} {
 }
 
 // GetUser : Fetches a user from the database
-func GetUser(u uint) *User {
+func GetUser(id uint) *User {
 	user := &User{}
-	GetDB().Table("users").Where("id = ?", u).First(user)
+	GetDB().Table("users").Where("id = ?", id).First(user)
 	if user.Email == "" {
 		// User not found
 		return nil
