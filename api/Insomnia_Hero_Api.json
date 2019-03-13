@@ -1,0 +1,281 @@
+{
+	"_type": "export",
+	"__export_format": 3,
+	"__export_date": "2019-03-13T18:28:19.436Z",
+	"__export_source": "insomnia.desktop.app:v6.3.2",
+	"resources": [
+		{
+			"_id": "wrk_38c674b2b91d438f8d9dd13591ecba54",
+			"created": 1552229648882,
+			"description": "",
+			"modified": 1552229648882,
+			"name": "Insomnia",
+			"parentId": null,
+			"_type": "workspace"
+		},
+		{
+			"_id": "env_bb97d6e58b484768bb78b272bbd4bdeb",
+			"color": null,
+			"created": 1552229648929,
+			"data": {},
+			"isPrivate": false,
+			"metaSortKey": 1552229648929,
+			"modified": 1552230414356,
+			"name": "New Environment",
+			"parentId": "wrk_38c674b2b91d438f8d9dd13591ecba54",
+			"_type": "environment"
+		},
+		{
+			"_id": "jar_e383fdc4fb3b494d830266abe8810f5f",
+			"cookies": [],
+			"created": 1552229648932,
+			"modified": 1552229648932,
+			"name": "Default Jar",
+			"parentId": "wrk_38c674b2b91d438f8d9dd13591ecba54",
+			"_type": "cookie_jar"
+		},
+		{
+			"_id": "fld_224cbe2b98d540a59232440124078621",
+			"created": 1552230606229,
+			"description": "",
+			"environment": {},
+			"metaSortKey": -1552230606230,
+			"modified": 1552230606229,
+			"name": "Hero API",
+			"parentId": "wrk_38c674b2b91d438f8d9dd13591ecba54",
+			"_type": "request_group"
+		},
+		{
+			"_id": "req_43d1fbd2b8d84b3e93c2de2cbf81a780",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"Iron Man\",\n \t\"identity\": \"Tony Stark\",\n\t\"hometown\": \"New York\",\n\t\"age\": 34\n}"
+			},
+			"created": 1552230127039,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_ca83dbf4994c48f295f79803760a0f62",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_d3f1a31b2785476fac918bfd15ecc239",
+					"name": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjF9.pL0mBx3adBKYmOpgyObgX1jl2XoifJnpFhiKKs4wgO0"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552230506963,
+			"method": "POST",
+			"modified": 1552493510268,
+			"name": "Create Hero",
+			"parameters": [],
+			"parentId": "fld_224cbe2b98d540a59232440124078621",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8000/hero",
+			"_type": "request"
+		},
+		{
+			"_id": "req_f95256b7de2344c9aaa73a7e80bea0e1",
+			"authentication": {},
+			"body": {},
+			"created": 1552230464798,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a45be2eb068a46b9894c04ea6f40c930",
+					"name": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjF9.pL0mBx3adBKYmOpgyObgX1jl2XoifJnpFhiKKs4wgO0"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552230506913,
+			"method": "GET",
+			"modified": 1552494669276,
+			"name": "Get Heroes",
+			"parameters": [],
+			"parentId": "fld_224cbe2b98d540a59232440124078621",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8000/heroes",
+			"_type": "request"
+		},
+		{
+			"_id": "req_0e1c6f54f2c74649839b57788dd72c40",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"name\": \"Hulk\",\n \t\"identity\": \"Bruce Banner\",\n\t\"hometown\": \"Chicago\",\n\t\"age\": 41\n}"
+			},
+			"created": 1552230496911,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_c4262d074061444cbc0fba83ec6a5d49",
+					"name": "Content-Type",
+					"value": "application/json"
+				},
+				{
+					"id": "pair_c57086f80d0844c89547e9c344054f44",
+					"name": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjF9.pL0mBx3adBKYmOpgyObgX1jl2XoifJnpFhiKKs4wgO0"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552230506863,
+			"method": "PUT",
+			"modified": 1552499929793,
+			"name": "Update Hero",
+			"parameters": [],
+			"parentId": "fld_224cbe2b98d540a59232440124078621",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8000/hero/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_217961991ca8437c976275a06a3b6d01",
+			"authentication": {},
+			"body": {},
+			"created": 1552230506863,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_1688207575fe4ca6abfa6bf6d834d12b",
+					"name": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjF9.pL0mBx3adBKYmOpgyObgX1jl2XoifJnpFhiKKs4wgO0"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552230506813,
+			"method": "DELETE",
+			"modified": 1552501532477,
+			"name": "Delete Hero",
+			"parameters": [],
+			"parentId": "fld_224cbe2b98d540a59232440124078621",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8000/hero/1",
+			"_type": "request"
+		},
+		{
+			"_id": "req_e84aba80216f4ae0b73ca64fd325d204",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"email\": \"test@test.com\",\n\t\"password\": \"secret\"\n}"
+			},
+			"created": 1552426580478,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_33b3f97e2d764924ab4c6296b1c2d489",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552230507013,
+			"method": "POST",
+			"modified": 1552488741933,
+			"name": "Create User",
+			"parameters": [],
+			"parentId": "fld_224cbe2b98d540a59232440124078621",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8000/user/register",
+			"_type": "request"
+		},
+		{
+			"_id": "req_b78168216a6741adbe05e13aee4e6249",
+			"authentication": {},
+			"body": {
+				"mimeType": "application/json",
+				"text": "{\n\t\"email\": \"test@test.com\",\n\t\"password\": \"secret\"\n}"
+			},
+			"created": 1552426740223,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_d5f31352fca2404da0fa7bb377b91107",
+					"name": "Content-Type",
+					"value": "application/json"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552230506988,
+			"method": "POST",
+			"modified": 1552492701812,
+			"name": "Login",
+			"parameters": [],
+			"parentId": "fld_224cbe2b98d540a59232440124078621",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8000/user/login",
+			"_type": "request"
+		},
+		{
+			"_id": "req_9ed9aae79b234fb6a204dc72976541f7",
+			"authentication": {},
+			"body": {},
+			"created": 1552494700825,
+			"description": "",
+			"headers": [
+				{
+					"id": "pair_a45be2eb068a46b9894c04ea6f40c930",
+					"name": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOjF9.pL0mBx3adBKYmOpgyObgX1jl2XoifJnpFhiKKs4wgO0"
+				}
+			],
+			"isPrivate": false,
+			"metaSortKey": -1552230506888,
+			"method": "GET",
+			"modified": 1552501552815,
+			"name": "Get Hero By Id",
+			"parameters": [
+				{
+					"disabled": false,
+					"id": "pair_de803e13725e461aa77168f442d1c0ea",
+					"name": "id",
+					"value": "1"
+				}
+			],
+			"parentId": "fld_224cbe2b98d540a59232440124078621",
+			"settingDisableRenderRequestBody": false,
+			"settingEncodeUrl": true,
+			"settingMaxTimelineDataSize": 1000,
+			"settingRebuildPath": true,
+			"settingSendCookies": true,
+			"settingStoreCookies": true,
+			"url": "http://localhost:8000/hero",
+			"_type": "request"
+		}
+	]
+}
