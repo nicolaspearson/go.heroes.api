@@ -1,6 +1,7 @@
 package models
 
 import (
+	"fmt"
 	"strings"
 
 	u "go-hero/utils"
@@ -72,8 +73,8 @@ func (hero *Hero) Create() map[string]interface{} {
 	return response
 }
 
-// GetHero : Fetches a hero from the database
-func GetHero(id uint) *Hero {
+// GetOne : Fetches a hero from the database
+func GetOne(id uint) *Hero {
 	hero := &Hero{}
 	GetDB().Table("heroes").Where("id = ?", id).First(hero)
 	if hero.Name == "" {
@@ -82,4 +83,15 @@ func GetHero(id uint) *Hero {
 	}
 
 	return hero
+}
+
+// GetAll : Fetches all of the heroes in the database
+func GetAll() []*Hero {
+	heroes := make([]*Hero, 0)
+	err := GetDB().Table("heroes").Order("id DESC").Find(&heroes).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	return heroes
 }

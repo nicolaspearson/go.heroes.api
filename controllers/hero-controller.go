@@ -3,6 +3,7 @@ package controllers
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 
 	"go-hero/models"
 	u "go-hero/utils"
@@ -21,5 +22,35 @@ var CreateHero = func(w http.ResponseWriter, r *http.Request) {
 
 	// Create the hero
 	resp := hero.Create()
+	u.Respond(w, resp)
+}
+
+// GetHero : Fetches a the hero associated with the provided id
+var GetHero = func(w http.ResponseWriter, r *http.Request) {
+	params := r.URL.Query()
+	idParam, ok := params["id"]
+	if !ok {
+		u.Respond(w, u.Message(false, "Invalid request"))
+		return
+	}
+
+	id, err := strconv.Atoi(idParam[0])
+	if err != nil {
+		// The parameter is not an integer
+		u.Respond(w, u.Message(false, "Invalid request"))
+		return
+	}
+
+	data := models.GetOne(uint(id))
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+}
+
+// GetHeroes : Fetches all the heroes
+var GetHeroes = func(w http.ResponseWriter, r *http.Request) {
+	data := models.GetAll()
+	resp := u.Message(true, "success")
+	resp["data"] = data
 	u.Respond(w, resp)
 }
