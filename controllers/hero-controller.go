@@ -67,7 +67,7 @@ var GetHero = func(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := models.GetOne(uint(id))
+	data := models.GetHero(uint(id))
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)
@@ -75,7 +75,7 @@ var GetHero = func(w http.ResponseWriter, r *http.Request) {
 
 // GetHeroes : Fetches all the heroes
 var GetHeroes = func(w http.ResponseWriter, r *http.Request) {
-	data := models.GetAll()
+	data := models.GetHeroes()
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)

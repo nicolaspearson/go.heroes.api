@@ -44,6 +44,29 @@ func (hero *Hero) Validate() (map[string]interface{}, bool) {
 	return u.Message(false, "Validation passed"), true
 }
 
+// GetHero : Fetches a hero from the database
+func GetHero(id uint) *Hero {
+	hero := &Hero{}
+	GetDB().Table("heroes").Where("id = ?", id).First(hero)
+	if hero.Name == "" {
+		// Hero not found
+		return nil
+	}
+
+	return hero
+}
+
+// GetHeroes : Fetches all of the heroes in the database
+func GetHeroes() []*Hero {
+	heroes := make([]*Hero, 0)
+	err := GetDB().Table("heroes").Order("id DESC").Find(&heroes).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	return heroes
+}
+
 // Create : Creates a new hero
 func (hero *Hero) Create() map[string]interface{} {
 	if resp, ok := hero.Validate(); !ok {
@@ -98,27 +121,4 @@ func (hero *Hero) Update(id int) map[string]interface{} {
 	response := u.Message(false, "Hero has been updated")
 	response["hero"] = hero
 	return response
-}
-
-// GetOne : Fetches a hero from the database
-func GetOne(id uint) *Hero {
-	hero := &Hero{}
-	GetDB().Table("heroes").Where("id = ?", id).First(hero)
-	if hero.Name == "" {
-		// Hero not found
-		return nil
-	}
-
-	return hero
-}
-
-// GetAll : Fetches all of the heroes in the database
-func GetAll() []*Hero {
-	heroes := make([]*Hero, 0)
-	err := GetDB().Table("heroes").Order("id DESC").Find(&heroes).Error
-	if err != nil {
-		fmt.Println(err)
-		return nil
-	}
-	return heroes
 }

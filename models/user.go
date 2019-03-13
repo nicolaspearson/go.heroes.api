@@ -51,6 +51,19 @@ func (user *User) Validate() (map[string]interface{}, bool) {
 	return u.Message(false, "Validation passed"), true
 }
 
+// GetUser : Fetches a user from the database
+func GetUser(id uint) *User {
+	user := &User{}
+	GetDB().Table("users").Where("id = ?", id).First(user)
+	if user.Email == "" {
+		// User not found
+		return nil
+	}
+
+	user.Password = ""
+	return user
+}
+
 // Create : Registers a new user
 func (user *User) Create() map[string]interface{} {
 	if resp, ok := user.Validate(); !ok {
@@ -109,17 +122,4 @@ func Login(email, password string) map[string]interface{} {
 	resp := u.Message(true, "Logged In")
 	resp["user"] = user
 	return resp
-}
-
-// GetUser : Fetches a user from the database
-func GetUser(id uint) *User {
-	user := &User{}
-	GetDB().Table("users").Where("id = ?", id).First(user)
-	if user.Email == "" {
-		// User not found
-		return nil
-	}
-
-	user.Password = ""
-	return user
 }
