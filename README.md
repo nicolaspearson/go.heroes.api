@@ -20,7 +20,7 @@ git clone https://github.com/nicolaspearson/go.heroes.api.git
 docker-compose up
 ```
 
-**3. Build and run the app using cargo**
+**3. Build and run the app**
 
 #### Run the app in development mode:
 
@@ -41,7 +41,7 @@ The app will start running at <http://localhost:8000>
 
 ## Endpoints
 
-The following endpoints are available
+The following endpoints are available:
 
 ```
 POST /api/user/new
@@ -65,4 +65,12 @@ PUT /hero/{heroId}
 
 ```
 DELETE /hero/{heroId}
+```
+
+## Benchmarking
+
+Run the following to benchmark request performance:
+
+```
+wrk -d1m http://localhost:8000/heroes
 ```
