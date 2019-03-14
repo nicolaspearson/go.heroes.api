@@ -51,7 +51,7 @@ func GetHero(id uint) *Hero {
 	}
 
 	hero := &Hero{}
-	GetDB().Table("heroes").Where("id = ?", id).First(hero)
+	GetDB().Table("hero").Where("id = ?", id).First(hero)
 	if hero.Name == "" {
 		// Hero not found
 		return nil
@@ -63,7 +63,7 @@ func GetHero(id uint) *Hero {
 // GetHeroes : Fetches all of the heroes in the database
 func GetHeroes() []*Hero {
 	heroes := make([]*Hero, 0)
-	err := GetDB().Table("heroes").Order("id DESC").Find(&heroes).Error
+	err := GetDB().Table("hero").Order("id DESC").Find(&heroes).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil
@@ -79,7 +79,7 @@ func (hero *Hero) Create() map[string]interface{} {
 
 	// Check for duplicates
 	temp := &Hero{}
-	err := GetDB().Table("heroes").Where("name = ?", hero.Name).First(temp).Error
+	err := GetDB().Table("hero").Where("name = ?", hero.Name).First(temp).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		fmt.Println(err)
 		return u.Message(false, "Insert operation failed")
@@ -112,7 +112,7 @@ func (hero *Hero) Update(id uint) map[string]interface{} {
 
 	// Ensure record exists
 	temp := &Hero{}
-	err := GetDB().Table("heroes").Where("id = ?", id).First(temp).Error
+	err := GetDB().Table("hero").Where("id = ?", id).First(temp).Error
 	if err != nil {
 		fmt.Println(err)
 		return u.Message(false, "Update operation failed, invalid id!")
