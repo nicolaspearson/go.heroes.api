@@ -11,7 +11,7 @@ import (
 
 // TableName : Override the default table name
 func (Hero) TableName() string {
-	return "heroes"
+	return "hero"
 }
 
 // Hero : A hero object struct
