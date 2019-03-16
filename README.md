@@ -1,6 +1,6 @@
 # Go Heroes API
 
-An example REST API built using Go and PostgreSQL.
+A simple REST API that provides CRUD operations on a `hero` object, it was built using Go and PostgreSQL.
 
 ## Dependencies
 
@@ -44,11 +44,15 @@ The app will start running at <http://localhost:8000>
 The following endpoints are available:
 
 ```
-POST /api/user/new
+POST /user/register
 ```
 
 ```
-POST /api/user/login
+POST /user/login
+```
+
+```
+GET /hero?id={heroId}
 ```
 
 ```
